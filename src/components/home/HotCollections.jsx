@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import OwlCarousel from "react-owl-carousel";
+import "owl.carousel/dist/assets/owl.carousel.css";
+import "owl.carousel/dist/assets/owl.theme.default.css";
 
 const HotCollections = () => {
   const [hotCollections, setHotCollections] = useState([]);
@@ -25,37 +28,42 @@ const HotCollections = () => {
             </div>
           </div>
           {hotCollections.map((item) => (
-            <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12" key={item.id}>
-              <div className="nft_coll">
-                <div className="nft_wrap">
-                  <Link to="/item-details">
-                    <img
-                      src={item.nftImage}
-                      className="lazy img-fluid"
-                      alt=""
-                    />
-                  </Link>
-                </div>
+            <OwlCarousel margin={10} items={4}>
+              <div
+                className="col-lg-3 col-md-6 col-sm-6 col-xs-12"
+                key={item.id}
+              >
+                <div className="nft_coll">
+                  <div className="nft_wrap">
+                    <Link to="/item-details">
+                      <img
+                        src={item.nftImage}
+                        className="lazy img-fluid"
+                        alt=""
+                      />
+                    </Link>
+                  </div>
 
-                <div className="nft_coll_pp">
-                  <Link to="/author">
-                    <img
-                      src={item.authorImage}
-                      className="lazy pp-coll"
-                      alt=""
-                    />
-                  </Link>
-                  <i className="fa fa-check"></i>
-                </div>
+                  <div className="nft_coll_pp">
+                    <Link to="/author">
+                      <img
+                        src={item.authorImage}
+                        className="lazy pp-coll"
+                        alt=""
+                      />
+                    </Link>
+                    <i className="fa fa-check"></i>
+                  </div>
 
-                <div className="nft_coll_info">
-                  <Link to="/explore">
-                    <h4>{item.title}</h4>
-                  </Link>
-                  <span>ERC-{item.code}</span>
+                  <div className="nft_coll_info">
+                    <Link to="/explore">
+                      <h4>{item.title}</h4>
+                    </Link>
+                    <span>ERC-{item.code}</span>
+                  </div>
                 </div>
               </div>
-            </div>
+            </OwlCarousel>
           ))}
         </div>
       </div>
