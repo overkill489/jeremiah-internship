@@ -28,7 +28,23 @@ const HotCollections = () => {
             </div>
           </div>
           {hotCollections.length > 0 && (
-            <OwlCarousel className="owl-theme" margin={10} items={4} nav loop>
+            <OwlCarousel
+              className="owl-theme"
+              margin={10}
+              responsive={{
+                0: {
+                  items: 1,
+                },
+                600: {
+                  items: 2,
+                },
+                1000: {
+                  items: 4,
+                },
+              }}
+              nav
+              loop
+            >
               {hotCollections.map((item) => (
                 <div className="" key={item.id}>
                   <div className="nft_coll">
