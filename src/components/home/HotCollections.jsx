@@ -27,44 +27,43 @@ const HotCollections = () => {
               <div className="small-border bg-color-2"></div>
             </div>
           </div>
-          {hotCollections.map((item) => (
-            <OwlCarousel margin={10} items={4}>
-              <div
-                className="col-lg-3 col-md-6 col-sm-6 col-xs-12"
-                key={item.id}
-              >
-                <div className="nft_coll">
-                  <div className="nft_wrap">
-                    <Link to="/item-details">
-                      <img
-                        src={item.nftImage}
-                        className="lazy img-fluid"
-                        alt=""
-                      />
-                    </Link>
-                  </div>
+          {hotCollections.length > 0 && (
+            <OwlCarousel className="owl-theme" margin={10} items={4} nav loop>
+              {hotCollections.map((item) => (
+                <div className="" key={item.id}>
+                  <div className="nft_coll">
+                    <div className="nft_wrap">
+                      <Link to="/item-details">
+                        <img
+                          src={item.nftImage}
+                          className="lazy img-fluid"
+                          alt=""
+                        />
+                      </Link>
+                    </div>
 
-                  <div className="nft_coll_pp">
-                    <Link to="/author">
-                      <img
-                        src={item.authorImage}
-                        className="lazy pp-coll"
-                        alt=""
-                      />
-                    </Link>
-                    <i className="fa fa-check"></i>
-                  </div>
+                    <div className="nft_coll_pp">
+                      <Link to="/author">
+                        <img
+                          src={item.authorImage}
+                          className="lazy pp-coll"
+                          alt=""
+                        />
+                      </Link>
+                      <i className="fa fa-check"></i>
+                    </div>
 
-                  <div className="nft_coll_info">
-                    <Link to="/explore">
-                      <h4>{item.title}</h4>
-                    </Link>
-                    <span>ERC-{item.code}</span>
+                    <div className="nft_coll_info">
+                      <Link to="/explore">
+                        <h4>{item.title}</h4>
+                      </Link>
+                      <span>ERC-{item.code}</span>
+                    </div>
                   </div>
                 </div>
-              </div>
+              ))}
             </OwlCarousel>
-          ))}
+          )}
         </div>
       </div>
     </section>
