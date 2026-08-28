@@ -37,13 +37,15 @@ const Countdown = () => {
 
 const NewItems = () => {
   const [newItems, setNewItems] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     fetch("https://us-central1-nft-cloud-functions.cloudfunctions.net/newItems")
       .then((response) => response.json())
       .then((data) => {
         setNewItems(data);
-      });
+      })
+      .finally(() => setIsLoading(false));
   }, []);
 
   return (
@@ -56,7 +58,15 @@ const NewItems = () => {
               <div className="small-border bg-color-2"></div>
             </div>
           </div>
-          {newItems.length > 0 && (
+          {isLoading ? (
+            <div className="row">
+              {newItems.map((_, index) => (
+                <div key={index}>
+                  <div className="nft_coll skeleton-card"></div>
+                </div>
+              ))}
+            </div>
+          ) : (
             <OwlCarousel
               className="owl-theme"
               margin={10}
