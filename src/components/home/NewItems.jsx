@@ -4,40 +4,39 @@ import OwlCarousel from "react-owl-carousel";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
 
-const NewItems = () => {
-  const [newItems, setNewItems] = useState([]);
+const Countdown = () => {
   const [timeLeft, setTimeLeft] = useState("");
 
-useEffect(() => {
-  const endTime = new Date().getTime() + 6 * 60 * 60 * 1000;
+  useEffect(() => {
+    const endTime = new Date().getTime() + 6 * 60 * 60 * 1000;
 
-  const timer = setInterval(() => {
-    const now = new Date().getTime();
-    const difference = endTime - now;
+    const timer = setInterval(() => {
+      const now = new Date().getTime();
+      const difference = endTime - now;
 
-    if (difference <= 0) {
-      setTimeLeft("Expired");
-      clearInterval(timer);
-      return;
-    }
+      if (difference <= 0) {
+        setTimeLeft("Expired");
+        clearInterval(timer);
+        return;
+      }
 
-    const hours = Math.floor(
-      (difference / (1000 * 60 * 60)) % 24
-    );
+      const hours = Math.floor((difference / (1000 * 60 * 60)) % 24);
 
-    const minutes = Math.floor(
-      (difference / (1000 * 60)) % 60
-    );
+      const minutes = Math.floor((difference / (1000 * 60)) % 60);
 
-    const seconds = Math.floor(
-      (difference / 1000) % 60
-    );
+      const seconds = Math.floor((difference / 1000) % 60);
 
-    setTimeLeft(`${hours}h ${minutes}m ${seconds}s`);
-  }, 1000);
+      setTimeLeft(`${hours}h ${minutes}m ${seconds}s`);
+    }, 1000);
 
-  return () => clearInterval(timer);
-}, []);
+    return () => clearInterval(timer);
+  }, []);
+
+  return <div className="de_countdown">{timeLeft}</div>;
+};
+
+const NewItems = () => {
+  const [newItems, setNewItems] = useState([]);
 
   useEffect(() => {
     fetch("https://us-central1-nft-cloud-functions.cloudfunctions.net/newItems")
@@ -76,9 +75,7 @@ useEffect(() => {
               loop
             >
               {newItems.map((item) => (
-                <div
-                  key={item.id}
-                >
+                <div key={item.id}>
                   <div className="nft__item">
                     <div className="author_list_pp">
                       <Link
@@ -91,7 +88,7 @@ useEffect(() => {
                         <i className="fa fa-check"></i>
                       </Link>
                     </div>
-                    <div className="de_countdown">{timeLeft}</div>
+                    <Countdown />
 
                     <div className="nft__item_wrap">
                       <div className="nft__item_extra">
