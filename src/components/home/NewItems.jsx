@@ -44,6 +44,7 @@ const NewItems = () => {
       .then((response) => response.json())
       .then((data) => {
         setNewItems(data);
+        console.log(data)
       })
       .finally(() => setIsLoading(false));
   }, []);
@@ -58,33 +59,40 @@ const NewItems = () => {
               <div className="small-border bg-color-2"></div>
             </div>
           </div>
-          {isLoading ? (
+          {isLoading && (
             <div className="row">
-              {newItems.map((_, index) => (
-                <div key={index}>
-                  <div className="nft_coll skeleton-card"></div>
+              {[1, 2, 3, 4].map((item) => (
+                <div className="col-lg-3 col-md-6 col-sm-12" key={item}>
+                  <div className="nft__item">
+                    <div className="skeleton skeleton--avatar"></div>
+                    <div className="skeleton skeleton--countdown"></div>
+                    <div className="skeleton skeleton--image"></div>
+                    <div className="skeleton skeleton--title"></div>
+                    <div className="skeleton skeleton--price"></div>
+                  </div>
                 </div>
               ))}
             </div>
-          ) : (
-            <OwlCarousel
-              className="owl-theme"
-              margin={10}
-              responsive={{
-                0: {
-                  items: 1,
-                },
-                600: {
-                  items: 2,
-                },
-                1000: {
-                  items: 4,
-                },
-              }}
-              nav
-              loop
-            >
-              {newItems.map((item) => (
+          )}
+          <OwlCarousel
+            className="owl-theme"
+            margin={10}
+            responsive={{
+              0: {
+                items: 1,
+              },
+              600: {
+                items: 2,
+              },
+              1000: {
+                items: 4,
+              },
+            }}
+            nav
+            loop
+          >
+            {!isLoading &&
+              newItems.map((item) => (
                 <div key={item.id}>
                   <div className="nft__item">
                     <div className="author_list_pp">
@@ -138,10 +146,9 @@ const NewItems = () => {
                       </div>
                     </div>
                   </div>
-                </div>
+                 </div>
               ))}
-            </OwlCarousel>
-          )}
+          </OwlCarousel>
         </div>
       </div>
     </section>
