@@ -96,7 +96,7 @@ const NewItems = () => {
                   <div className="nft__item">
                     <div className="author_list_pp">
                       <Link
-                        to={`item-details/${item.id}`}
+                        to={`author/${item.id}`}
                         data-bs-toggle="tooltip"
                         data-bs-placement="top"
                         title="Creator: Monica Lucas"
