@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import AuthorImage from "../../images/author_thumbnail.jpg";
-import nftImage from "../../images/nftImage.jpg";
 
 const ExploreItems = () => {
   const [exploreItems, setExploreItems] = useState([]);
@@ -12,10 +10,34 @@ const ExploreItems = () => {
       .then((data) => setExploreItems(data));
   }, []);
 
+  function filterNft(filter) {
+    if (filter === "price_low_to_high") {
+      setExploreItems(
+        exploreItems.slice().sort(
+          (a, b) => (a.price) - (b.price),
+        ),
+      );
+    }
+    if (filter === "price_high_to_low") {
+      setExploreItems(exploreItems.slice().sort(
+        (a,b) => (b.price) -(a.price)
+      ))
+    }
+    if (filter === "likes_high_to_low") {
+      setExploreItems(exploreItems.slice().sort(
+        (a,b) => b.likes - a.likes
+      ))
+    }
+  }
+
   return (
     <>
       <div>
-        <select id="filter-items" defaultValue="">
+        <select
+          id="filter-items"
+          defaultValue=""
+          onChange={(event) => filterNft(event.target.value)}
+        >
           <option value="">Default</option>
           <option value="price_low_to_high">Price, Low to High</option>
           <option value="price_high_to_low">Price, High to Low</option>
@@ -60,7 +82,11 @@ const ExploreItems = () => {
                 </div>
               </div>
               <Link to="/item-details">
-                <img src={item.nftImage} className="lazy nft__item_preview" alt="" />
+                <img
+                  src={item.nftImage}
+                  className="lazy nft__item_preview"
+                  alt=""
+                />
               </Link>
             </div>
             <div className="nft__item_info">
