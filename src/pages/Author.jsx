@@ -29,9 +29,7 @@ const Author = () => {
         setAuthor(data);
       })
       .finally(() => {
-        setTimeout(() => {
-          setIsLoading(false);
-        }, 2000);
+        setIsLoading(false);
       });
   }, [id]);
 
