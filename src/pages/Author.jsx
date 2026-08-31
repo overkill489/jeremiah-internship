@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import AuthorSkeleton from "./AuthorSkeleton";
 import AuthorBanner from "../images/author_banner.jpg";
 import AuthorItems from "../components/author/AuthorItems";
 
 const Author = () => {
+  const [isLoading, setIsLoading] = useState(true);
   const [author, setAuthor] = useState([]);
   const { id } = useParams();
   const [isFollowing, setIsFollowing] = useState(() => {
@@ -26,8 +28,16 @@ const Author = () => {
       .then((data) => {
         setAuthor(data);
       })
-      .catch((error) => console.error(error));
+      .finally(() => {
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 2000);
+      });
   }, [id]);
+
+  if (isLoading) {
+    return <AuthorSkeleton />;
+  }
 
   return (
     <div id="wrapper">
