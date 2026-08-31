@@ -1,6 +1,37 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
+const Countdown = ({ itemId }) => {
+  const [timeLeft, setTimeLeft] = useState("");
+
+  useEffect(() => {
+    const endTime = new Date().getTime() + 6 * 60 * 60 * 1000 + itemId * 100000;
+
+    const timer = setInterval(() => {
+      const now = new Date().getTime();
+      const difference = endTime - now;
+
+      if (difference <= 0) {
+        setTimeLeft("Expired");
+        clearInterval(timer);
+        return;
+      }
+
+      const hours = Math.floor((difference / (1000 * 60 * 60)) % 24);
+
+      const minutes = Math.floor((difference / (1000 * 60)) % 60);
+
+      const seconds = Math.floor((difference / 1000) % 60);
+
+      setTimeLeft(`${hours}h ${minutes}m ${seconds}s`);
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [itemId]);
+
+  return <div className="de_countdown">{timeLeft}</div>;
+};
+
 const ExploreItems = () => {
   const [exploreItems, setExploreItems] = useState([]);
   const [visibleItems, setVisibleItems] = useState(8);
@@ -58,7 +89,7 @@ const ExploreItems = () => {
                 <i className="fa fa-check"></i>
               </Link>
             </div>
-            <div className="de_countdown">5h 30m 32s</div>
+            {item.expiryDate && <Countdown itemId={item.expiryDate} />}
 
             <div className="nft__item_wrap">
               <div className="nft__item_extra">

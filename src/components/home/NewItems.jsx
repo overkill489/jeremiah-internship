@@ -4,11 +4,11 @@ import OwlCarousel from "react-owl-carousel";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
 
-const Countdown = () => {
+const Countdown = ({ itemId }) => {
   const [timeLeft, setTimeLeft] = useState("");
 
   useEffect(() => {
-    const endTime = new Date().getTime() + 6 * 60 * 60 * 1000;
+    const endTime = new Date().getTime() + 6 * 60 * 60 * 1000 + itemId * 100000;
 
     const timer = setInterval(() => {
       const now = new Date().getTime();
@@ -30,7 +30,7 @@ const Countdown = () => {
     }, 1000);
 
     return () => clearInterval(timer);
-  }, []);
+  }, [itemId]);
 
   return <div className="de_countdown">{timeLeft}</div>;
 };
@@ -105,7 +105,7 @@ const NewItems = () => {
                         <i className="fa fa-check"></i>
                       </Link>
                     </div>
-                    <Countdown />
+                    {item.expiryDate && <Countdown itemId={item.expiryDate} />}
 
                     <div className="nft__item_wrap">
                       <div className="nft__item_extra">
