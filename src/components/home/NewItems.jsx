@@ -60,17 +60,11 @@ const NewItems = () => {
           </div>
           {isLoading ? (
             <div className="row">
-              {[1, 2, 3, 4].map((item) => (
-                <div className="col-lg-3 col-md-6 col-sm-12" key={item}>
-                  <div className="nft__item">
-                    <div className="skeleton skeleton--avatar"></div>
-                    <div className="skeleton skeleton--countdown"></div>
-                    <div className="skeleton skeleton--image"></div>
-                    <div className="skeleton skeleton--title"></div>
-                    <div className="skeleton skeleton--price"></div>
+              {new Array(4).fill(0).map((_, index) => (
+                  <div className="col-lg-3 col-md-6 col-sm-6" key={index}>
+                    <div className="nft_coll skeleton-card"></div>
                   </div>
-                </div>
-              ))}
+                ))}
             </div>
           ) : (
             <OwlCarousel
