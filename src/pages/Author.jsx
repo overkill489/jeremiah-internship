@@ -2,12 +2,21 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import AuthorBanner from "../images/author_banner.jpg";
 import AuthorItems from "../components/author/AuthorItems";
-import { Link } from "react-router-dom";
-import AuthorImage from "../images/author_thumbnail.jpg";
 
 const Author = () => {
   const [author, setAuthor] = useState([]);
   const { id } = useParams();
+  const [isFollowing, setIsFollowing] = useState(() => {
+    return localStorage.getItem(`following-${id}`) === "true";
+  });
+
+  function toggleFollow() {
+    const newFollowingState = !isFollowing;
+
+    setIsFollowing(!isFollowing);
+
+    localStorage.setItem(`following-${id}`, newFollowingState);
+  }
 
   useEffect(() => {
     fetch(
@@ -46,7 +55,9 @@ const Author = () => {
                       <div className="profile_name">
                         <h4>
                           {author.authorName}
-                          <span className="profile_username">@{author.tag}</span>
+                          <span className="profile_username">
+                            @{author.tag}
+                          </span>
                           <span id="wallet" className="profile_wallet">
                             {author.address}
                           </span>
@@ -59,10 +70,12 @@ const Author = () => {
                   </div>
                   <div className="profile_follow de-flex">
                     <div className="de-flex-col">
-                      <div className="profile_follower">{author.followers} followers</div>
-                      <Link to="#" className="btn-main">
-                        Follow
-                      </Link>
+                      <div className="profile_follower">
+                        {author.followers + (isFollowing ? 1 : 0)} followers
+                      </div>
+                      <button className="btn-main" onClick={toggleFollow}>
+                        {isFollowing ? "Unfollow" : "Follow"}
+                      </button>
                     </div>
                   </div>
                 </div>

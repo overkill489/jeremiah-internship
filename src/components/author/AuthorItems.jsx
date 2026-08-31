@@ -10,6 +10,8 @@ const AuthorItems = () => {
   const { id } = useParams();
   const [authorImage, setAuthorImage] = useState("");
 
+  
+
   useEffect(() => {
     fetch("https://us-central1-nft-cloud-functions.cloudfunctions.net/explore")
       .then((response) => response.json())
