@@ -4,11 +4,11 @@ import OwlCarousel from "react-owl-carousel";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
 
-const Countdown = () => {
+const Countdown = ({ itemId }) => {
   const [timeLeft, setTimeLeft] = useState("");
 
   useEffect(() => {
-    const endTime = new Date().getTime() + 6 * 60 * 60 * 1000;
+    const endTime = new Date().getTime() + 6 * 60 * 60 * 1000 + itemId * 100000;
 
     const timer = setInterval(() => {
       const now = new Date().getTime();
@@ -30,7 +30,7 @@ const Countdown = () => {
     }, 1000);
 
     return () => clearInterval(timer);
-  }, []);
+  }, [itemId]);
 
   return <div className="de_countdown">{timeLeft}</div>;
 };
@@ -60,17 +60,11 @@ const NewItems = () => {
           </div>
           {isLoading ? (
             <div className="row">
-              {[1, 2, 3, 4].map((item) => (
-                <div className="col-lg-3 col-md-6 col-sm-12" key={item}>
-                  <div className="nft__item">
-                    <div className="skeleton skeleton--avatar"></div>
-                    <div className="skeleton skeleton--countdown"></div>
-                    <div className="skeleton skeleton--image"></div>
-                    <div className="skeleton skeleton--title"></div>
-                    <div className="skeleton skeleton--price"></div>
+              {new Array(4).fill(0).map((_, index) => (
+                  <div className="col-lg-3 col-md-6 col-sm-6" key={index}>
+                    <div className="nft_coll skeleton-card"></div>
                   </div>
-                </div>
-              ))}
+                ))}
             </div>
           ) : (
             <OwlCarousel
@@ -105,7 +99,7 @@ const NewItems = () => {
                         <i className="fa fa-check"></i>
                       </Link>
                     </div>
-                    <Countdown />
+                    {item.expiryDate && <Countdown itemId={item.expiryDate} />}
 
                     <div className="nft__item_wrap">
                       <div className="nft__item_extra">
