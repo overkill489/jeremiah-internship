@@ -82,7 +82,7 @@ const HotCollections = () => {
                       </div>
 
                       <div className="nft_coll_info">
-                        <Link to={`item-details/${item.id}`}>
+                        <Link to={`item-details/${item.nftId}`}>
                           <h4>{item.title}</h4>
                         </Link>
 
