@@ -47,7 +47,7 @@ const Author = () => {
           aria-label="section"
           className="text-light"
           data-bgimage="url(images/author_banner.jpg) top"
-          style={{ background: `url(${AuthorBanner}) top` }}
+          style={{ background: `url(${author.authorImage}) top` }}
         ></section>
 
         <section aria-label="section">
