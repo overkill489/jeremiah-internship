@@ -52,7 +52,7 @@ const NewItems = () => {
     <section id="section-items" className="no-bottom">
       <div className="container">
         <div className="row">
-          <div className="col-lg-12">
+          <div className="col-lg-12" data-aos="fade-up">
             <div className="text-center">
               <h2>New Items</h2>
               <div className="small-border bg-color-2"></div>
@@ -86,7 +86,7 @@ const NewItems = () => {
               loop
             >
               {newItems.map((item) => (
-                <div key={item.id}>
+                <div key={item.id} data-aos="fade-right">
                   <div className="nft__item">
                     <div className="author_list_pp">
                       <Link
