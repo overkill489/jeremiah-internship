@@ -48,6 +48,7 @@ const Author = () => {
           className="text-light"
           data-bgimage="url(images/author_banner.jpg) top"
           style={{ background: `url(${author.authorImage}) top` }}
+          data-aos="fade-down"
         ></section>
 
         <section aria-label="section">
@@ -55,7 +56,7 @@ const Author = () => {
             <div className="row">
               <div className="col-md-12">
                 <div className="d_profile de-flex">
-                  <div className="de-flex-col">
+                  <div className="de-flex-col" data-aos="fade-right">
                     <div className="profile_avatar">
                       <img src={author.authorImage} alt="" />
 
@@ -76,7 +77,7 @@ const Author = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="profile_follow de-flex">
+                  <div className="profile_follow de-flex" data-aos="fade-left">
                     <div className="de-flex-col">
                       <div className="profile_follower">
                         {author.followers + (isFollowing ? 1 : 0)} followers

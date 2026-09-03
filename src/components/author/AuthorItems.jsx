@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import AuthorImage from "../../images/author_thumbnail.jpg";
-import nftImage from "../../images/nftImage.jpg";
 import { useParams } from "react-router-dom";
 
 const AuthorItems = () => {
@@ -40,7 +38,7 @@ const AuthorItems = () => {
       <div className="tab-1">
         <div className="row">
           {authorItems.map((item) => (
-            <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12" key={item.id}>
+            <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12" key={item.id} data-aos="fade-up">
               <div className="nft__item">
                 <div className="author_list_pp">
                   <Link to={`/item-details/${item.nftId}`}>
